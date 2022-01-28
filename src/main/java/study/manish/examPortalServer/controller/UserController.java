@@ -1,6 +1,7 @@
 package study.manish.examPortalServer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import study.manish.examPortalServer.model.Role;
 import study.manish.examPortalServer.model.User;
@@ -17,12 +18,19 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 //    creating user
     @PostMapping("/")
 
     public User createUser(@RequestBody User user) throws Exception {
 
         user.setProfile("default.png");
+
+//        encoding password with bCrypt
+        user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
+
         Set<UserRole> roles = new HashSet<>();
 
         Role role = new Role();

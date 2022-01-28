@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import study.manish.examPortalServer.model.Role;
 import study.manish.examPortalServer.model.User;
 import study.manish.examPortalServer.model.UserRole;
@@ -17,6 +18,9 @@ public class ExamPortalServerApplication implements CommandLineRunner {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	public static void main(String[] args) {
 
 
@@ -26,12 +30,14 @@ public class ExamPortalServerApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("starting code");
+
+
 //		User user = new User();
-//
+
 //		user.setFirstName("Manish");
 //		user.setLastName("Sahu");
 //		user.setUsername("man7");
-//		user.setPassword("man");
+//		user.setPassword(this.bCryptPasswordEncoder.encode("admin"));
 //		user.setEmail("man@gmail.com");
 //		user.setProfile("default.png");
 //
