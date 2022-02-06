@@ -1,8 +1,10 @@
 package study.manish.examPortalServer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import study.manish.examPortalServer.helper.UserFoundException;
 import study.manish.examPortalServer.model.Role;
 import study.manish.examPortalServer.model.User;
 import study.manish.examPortalServer.model.UserRole;
@@ -61,6 +63,10 @@ public class UserController {
         this.userService.deleteUser(userId);
     }
 
+    @ExceptionHandler(UserFoundException.class)
+    public ResponseEntity<?> exceptionHandler(UserFoundException ex) {
+        return ResponseEntity.ok(ex.getMessage());
+    }
 
 
 }
